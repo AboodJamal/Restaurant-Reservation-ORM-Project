@@ -1,4 +1,6 @@
-﻿namespace RestaurantReservation.Db
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace RestaurantReservation.Db
 {
     public class Customer
     {
@@ -55,6 +57,7 @@
 
     public class MenuItem
     {
+        [Key]
         public int ItemId { get; set; } // Primary Key
         public int RestaurantId { get; set; } // Foreign Key
         public string Name { get; set; }
