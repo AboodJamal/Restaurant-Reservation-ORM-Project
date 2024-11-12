@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using RestaurantReservation.Db;
+using RestaurantReservation;
 using System;
 using System.IO;
 using System.Linq;
@@ -31,6 +32,14 @@ namespace RestaurantReservation
                 await Tests.ListOrdersAndMenuItems(context, 1);
                 await Tests.ListOrderedMenuItems(context, 1);
                 await Tests.CalculateAverageOrderAmount(context, 3);
+
+
+                await CUD_OperationsTest.TestCustomerOperations(context);
+                await CUD_OperationsTest.TestRestaurantOperations(context);
+                await CUD_OperationsTest.TestTableOperations(context);
+                await CUD_OperationsTest.TestMenuItemOperations(context);
+                await CUD_OperationsTest.TestReservationOperations(context);
+
             }
 
             Console.WriteLine("Database operations completed.");
