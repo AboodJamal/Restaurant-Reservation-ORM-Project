@@ -20,6 +20,10 @@ namespace RestaurantReservation.Db
         public DbSet<Table> Tables { get; set; }
         public DbSet<Restaurant> Restaurants { get; set; }
 
+        public DbSet<ReservationWithCustomerAndRestaurant> ReservationsWithCustomerAndRestaurant { get; set; }
+
+        public DbSet<EmployeeWithRestaurantDetails> EmployeesWithRestaurantDetails { get; set; }
+
         public RestaurantReservationDbContext(DbContextOptions<RestaurantReservationDbContext> options)
             : base(options)
         { }
@@ -85,6 +89,17 @@ namespace RestaurantReservation.Db
                 .HasOne(t => t.Restaurant)
                 .WithMany(r => r.Tables)
                 .HasForeignKey(t => t.RestaurantId);
+
+            modelBuilder
+        .Entity<ReservationWithCustomerAndRestaurant>()
+        .HasNoKey() // Views don’t have a primary key
+        .ToView("vw_ReservationsWithCustomerAndRestaurant");
+
+            modelBuilder
+    .Entity<EmployeeWithRestaurantDetails>()
+    .HasNoKey()
+    .ToView("vw_EmployeesWithRestaurantDetails");
+
 
             modelBuilder.Entity<Customer>().HasData(
         new Customer { CustomerId = 1, FirstName = "John", LastName = "Doe", Email = "john.doe@example.com", PhoneNumber = "1234567890" },

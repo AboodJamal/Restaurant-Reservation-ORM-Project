@@ -82,5 +82,36 @@ namespace RestaurantReservation
             Console.WriteLine($"Average Order Amount for Employee {employeeId}: {averageAmount:C}");
             Console.WriteLine();
         }
+
+        public static async Task ListReservationsWithDetails(RestaurantReservationDbContext context)
+        {
+            var reservationsWithDetails = await context.ReservationsWithCustomerAndRestaurant.ToListAsync();
+
+            foreach (var reservation in reservationsWithDetails)
+            {
+                Console.WriteLine($"Reservation ID: {reservation.ReservationId}, " +
+                                  $"Customer: {reservation.CustomerFirstName} {reservation.CustomerLastName}, " +
+                                  $"Restaurant: {reservation.RestaurantName}, " +
+                                  $"Date: {reservation.ReservationDate}, " +
+                                  $"Party Size: {reservation.PartySize}");
+            }
+        }
+
+        public static async Task ListEmployeesWithRestaurantDetails(RestaurantReservationDbContext context)
+        {
+            var employeesWithDetails = await context.EmployeesWithRestaurantDetails.ToListAsync();
+
+            foreach (var employee in employeesWithDetails)
+            {
+                Console.WriteLine($"Employee ID: {employee.EmployeeId}, " +
+                                  $"Name: {employee.EmployeeFirstName} {employee.EmployeeLastName}, " +
+                                  $"Position: {employee.Position}, " +
+                                  $"Restaurant: {employee.RestaurantName}, " +
+                                  $"Address: {employee.RestaurantAddress}, " +
+                                  $"Phone: {employee.RestaurantPhoneNumber}");
+            }
+        }
+
+
     }
 }

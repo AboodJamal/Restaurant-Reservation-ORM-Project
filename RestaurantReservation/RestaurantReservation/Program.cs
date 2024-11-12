@@ -39,6 +39,12 @@ namespace RestaurantReservation
                 await CUD_OperationsTest.TestTableOperations(context);
                 await CUD_OperationsTest.TestMenuItemOperations(context);
                 await CUD_OperationsTest.TestReservationOperations(context);
+
+
+                await Tests.ListReservationsWithDetails(context);
+                await Tests.ListEmployeesWithRestaurantDetails(context);
+
+
             }
 
             Console.WriteLine("Database operations completed.");
