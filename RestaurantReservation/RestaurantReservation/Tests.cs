@@ -132,6 +132,20 @@ namespace RestaurantReservation
         }
 
 
+        public static async Task<List<Customer>> FindCustomersByPartySize(RestaurantReservationDbContext dbContext, int partySize)
+        {
+            // Use FromSqlRaw to execute the stored procedure and retrieve the result
+            var customers = await dbContext.Customers
+                .FromSqlRaw("EXECUTE FindCustomersByPartySize @PartySize = {0}", partySize)
+                .ToListAsync();
+
+            return customers;
+        }
+
+
+
+
+
 
 
     }

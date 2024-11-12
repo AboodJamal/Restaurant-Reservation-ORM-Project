@@ -48,6 +48,14 @@ namespace RestaurantReservation
                 decimal totalRevenue = await Tests.CalculateTotalRevenueForRestaurant(context,restaurantId); 
                 Console.WriteLine($"Total Revenue for Restaurant ID {restaurantId}: {totalRevenue}");
 
+                var partySize = 4;
+                var customers = await Tests.FindCustomersByPartySize(context, partySize);
+
+                Console.WriteLine($"Customers with Party Size greater than {partySize}:");
+                foreach (var customer in customers)
+                {
+                    Console.WriteLine($"Customer: {customer.FirstName} {customer.LastName} ({customer.Email})");
+                }
 
             }
 
