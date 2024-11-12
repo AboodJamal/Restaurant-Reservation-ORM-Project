@@ -75,7 +75,6 @@ namespace RestaurantReservation.Db
         public int OrderId { get; set; } // Foreign Key
         public int ItemId { get; set; } // Foreign Key
         public int Quantity { get; set; }
-
         public Order Order { get; set; }
         public MenuItem MenuItem { get; set; }
     }
@@ -89,7 +88,6 @@ namespace RestaurantReservation.Db
         public Restaurant Restaurant { get; set; }
         public ICollection<Reservation> Reservations { get; set; }
     }
-
 
     public class Restaurant
     {
