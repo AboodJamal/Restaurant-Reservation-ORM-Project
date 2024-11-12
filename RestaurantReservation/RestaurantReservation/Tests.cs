@@ -1,10 +1,12 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using RestaurantReservation.Db;
 using System;
+using Microsoft.Extensions.Configuration;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.Data.SqlClient;
 
 namespace RestaurantReservation
 {
@@ -111,6 +113,25 @@ namespace RestaurantReservation
                                   $"Phone: {employee.RestaurantPhoneNumber}");
             }
         }
+
+        public static async Task<decimal> CalculateTotalRevenueForRestaurant(RestaurantReservationDbContext context, int restaurantId)
+        {
+            var commandText = "SELECT dbo.CalculateTotalRevenue(@RestaurantId)";
+            var parameter = new SqlParameter("@RestaurantId", restaurantId);
+
+            using (var command = context.Database.GetDbConnection().CreateCommand())
+            {
+                command.CommandText = commandText;
+                command.Parameters.Add(parameter);
+
+                await context.Database.OpenConnectionAsync();
+
+                var result = await command.ExecuteScalarAsync();
+                return result != null ? Convert.ToDecimal(result) : -1;
+            }
+        }
+
+
 
 
     }

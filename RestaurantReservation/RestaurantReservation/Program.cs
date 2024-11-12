@@ -44,6 +44,10 @@ namespace RestaurantReservation
                 await Tests.ListReservationsWithDetails(context);
                 await Tests.ListEmployeesWithRestaurantDetails(context);
 
+                var restaurantId = 1;
+                decimal totalRevenue = await Tests.CalculateTotalRevenueForRestaurant(context,restaurantId); 
+                Console.WriteLine($"Total Revenue for Restaurant ID {restaurantId}: {totalRevenue}");
+
 
             }
 

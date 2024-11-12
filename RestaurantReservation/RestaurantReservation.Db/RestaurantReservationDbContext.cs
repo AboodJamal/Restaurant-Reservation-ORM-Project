@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore; 
 using System.Reflection.Emit;
+using Microsoft.Data.SqlClient;
 
 namespace RestaurantReservation.Db
 {
@@ -166,7 +167,10 @@ namespace RestaurantReservation.Db
                 new OrderItem { OrderItemId = 4, OrderId = 4, ItemId = 4, Quantity = 2 },
                 new OrderItem { OrderItemId = 5, OrderId = 5, ItemId = 5, Quantity = 1 }
             );
+
         }
+
+
     }
 
 
