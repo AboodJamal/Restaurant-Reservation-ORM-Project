@@ -49,6 +49,48 @@ namespace RestaurantReservation.Db.Migrations
                     b.HasKey("CustomerId");
 
                     b.ToTable("Customers");
+
+                    b.HasData(
+                        new
+                        {
+                            CustomerId = 1,
+                            Email = "john.doe@example.com",
+                            FirstName = "John",
+                            LastName = "Doe",
+                            PhoneNumber = "1234567890"
+                        },
+                        new
+                        {
+                            CustomerId = 2,
+                            Email = "jane.smith@example.com",
+                            FirstName = "Jane",
+                            LastName = "Smith",
+                            PhoneNumber = "9876543210"
+                        },
+                        new
+                        {
+                            CustomerId = 3,
+                            Email = "robert.johnson@example.com",
+                            FirstName = "Robert",
+                            LastName = "Johnson",
+                            PhoneNumber = "5555555555"
+                        },
+                        new
+                        {
+                            CustomerId = 4,
+                            Email = "emily.davis@example.com",
+                            FirstName = "Emily",
+                            LastName = "Davis",
+                            PhoneNumber = "4444444444"
+                        },
+                        new
+                        {
+                            CustomerId = 5,
+                            Email = "michael.brown@example.com",
+                            FirstName = "Michael",
+                            LastName = "Brown",
+                            PhoneNumber = "3333333333"
+                        });
                 });
 
             modelBuilder.Entity("RestaurantReservation.Db.Employee", b =>
@@ -79,6 +121,48 @@ namespace RestaurantReservation.Db.Migrations
                     b.HasIndex("RestaurantId");
 
                     b.ToTable("Employees");
+
+                    b.HasData(
+                        new
+                        {
+                            EmployeeId = 1,
+                            FirstName = "Alice",
+                            LastName = "Williams",
+                            Position = "Manager",
+                            RestaurantId = 1
+                        },
+                        new
+                        {
+                            EmployeeId = 2,
+                            FirstName = "Bob",
+                            LastName = "Martinez",
+                            Position = "Waiter",
+                            RestaurantId = 2
+                        },
+                        new
+                        {
+                            EmployeeId = 3,
+                            FirstName = "Charlie",
+                            LastName = "Lee",
+                            Position = "Chef",
+                            RestaurantId = 3
+                        },
+                        new
+                        {
+                            EmployeeId = 4,
+                            FirstName = "David",
+                            LastName = "Wilson",
+                            Position = "Bartender",
+                            RestaurantId = 4
+                        },
+                        new
+                        {
+                            EmployeeId = 5,
+                            FirstName = "Eve",
+                            LastName = "Taylor",
+                            Position = "Manager",
+                            RestaurantId = 5
+                        });
                 });
 
             modelBuilder.Entity("RestaurantReservation.Db.MenuItem", b =>
@@ -98,6 +182,7 @@ namespace RestaurantReservation.Db.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<decimal>("Price")
+                        .HasPrecision(18, 2)
                         .HasColumnType("decimal(18,2)");
 
                     b.Property<int>("RestaurantId")
@@ -108,6 +193,48 @@ namespace RestaurantReservation.Db.Migrations
                     b.HasIndex("RestaurantId");
 
                     b.ToTable("MenuItems");
+
+                    b.HasData(
+                        new
+                        {
+                            ItemId = 1,
+                            Description = "Juicy beef patty with gourmet toppings",
+                            Name = "Gourmet Burger",
+                            Price = 12.99m,
+                            RestaurantId = 1
+                        },
+                        new
+                        {
+                            ItemId = 2,
+                            Description = "Classic pizza with tomatoes and mozzarella",
+                            Name = "Margherita Pizza",
+                            Price = 8.99m,
+                            RestaurantId = 2
+                        },
+                        new
+                        {
+                            ItemId = 3,
+                            Description = "Fresh sushi rolls with crab and avocado",
+                            Name = "California Roll",
+                            Price = 10.99m,
+                            RestaurantId = 3
+                        },
+                        new
+                        {
+                            ItemId = 4,
+                            Description = "Classic burger with melted cheese",
+                            Name = "Cheeseburger",
+                            Price = 9.99m,
+                            RestaurantId = 4
+                        },
+                        new
+                        {
+                            ItemId = 5,
+                            Description = "Succulent ribeye cooked to perfection",
+                            Name = "Ribeye Steak",
+                            Price = 22.99m,
+                            RestaurantId = 5
+                        });
                 });
 
             modelBuilder.Entity("RestaurantReservation.Db.Order", b =>
@@ -128,6 +255,7 @@ namespace RestaurantReservation.Db.Migrations
                         .HasColumnType("int");
 
                     b.Property<decimal>("TotalAmount")
+                        .HasPrecision(18, 2)
                         .HasColumnType("decimal(18,2)");
 
                     b.HasKey("OrderId");
@@ -137,6 +265,48 @@ namespace RestaurantReservation.Db.Migrations
                     b.HasIndex("ReservationId");
 
                     b.ToTable("Orders");
+
+                    b.HasData(
+                        new
+                        {
+                            OrderId = 1,
+                            EmployeeId = 1,
+                            OrderDate = new DateTime(2024, 11, 12, 2, 30, 24, 997, DateTimeKind.Local).AddTicks(5591),
+                            ReservationId = 1,
+                            TotalAmount = 50.00m
+                        },
+                        new
+                        {
+                            OrderId = 2,
+                            EmployeeId = 2,
+                            OrderDate = new DateTime(2024, 11, 12, 2, 30, 24, 997, DateTimeKind.Local).AddTicks(5596),
+                            ReservationId = 2,
+                            TotalAmount = 35.50m
+                        },
+                        new
+                        {
+                            OrderId = 3,
+                            EmployeeId = 3,
+                            OrderDate = new DateTime(2024, 11, 12, 2, 30, 24, 997, DateTimeKind.Local).AddTicks(5598),
+                            ReservationId = 3,
+                            TotalAmount = 75.00m
+                        },
+                        new
+                        {
+                            OrderId = 4,
+                            EmployeeId = 4,
+                            OrderDate = new DateTime(2024, 11, 12, 2, 30, 24, 997, DateTimeKind.Local).AddTicks(5600),
+                            ReservationId = 4,
+                            TotalAmount = 28.25m
+                        },
+                        new
+                        {
+                            OrderId = 5,
+                            EmployeeId = 5,
+                            OrderDate = new DateTime(2024, 11, 12, 2, 30, 24, 997, DateTimeKind.Local).AddTicks(5602),
+                            ReservationId = 5,
+                            TotalAmount = 90.00m
+                        });
                 });
 
             modelBuilder.Entity("RestaurantReservation.Db.OrderItem", b =>
@@ -163,6 +333,43 @@ namespace RestaurantReservation.Db.Migrations
                     b.HasIndex("OrderId");
 
                     b.ToTable("OrderItems");
+
+                    b.HasData(
+                        new
+                        {
+                            OrderItemId = 1,
+                            ItemId = 1,
+                            OrderId = 1,
+                            Quantity = 2
+                        },
+                        new
+                        {
+                            OrderItemId = 2,
+                            ItemId = 2,
+                            OrderId = 2,
+                            Quantity = 1
+                        },
+                        new
+                        {
+                            OrderItemId = 3,
+                            ItemId = 3,
+                            OrderId = 3,
+                            Quantity = 3
+                        },
+                        new
+                        {
+                            OrderItemId = 4,
+                            ItemId = 4,
+                            OrderId = 4,
+                            Quantity = 2
+                        },
+                        new
+                        {
+                            OrderItemId = 5,
+                            ItemId = 5,
+                            OrderId = 5,
+                            Quantity = 1
+                        });
                 });
 
             modelBuilder.Entity("RestaurantReservation.Db.Reservation", b =>
@@ -197,6 +404,53 @@ namespace RestaurantReservation.Db.Migrations
                     b.HasIndex("TableId");
 
                     b.ToTable("Reservations");
+
+                    b.HasData(
+                        new
+                        {
+                            ReservationId = 1,
+                            CustomerId = 1,
+                            PartySize = 4,
+                            ReservationDate = new DateTime(2024, 11, 12, 1, 30, 24, 997, DateTimeKind.Local).AddTicks(5492),
+                            RestaurantId = 1,
+                            TableId = 1
+                        },
+                        new
+                        {
+                            ReservationId = 2,
+                            CustomerId = 2,
+                            PartySize = 2,
+                            ReservationDate = new DateTime(2024, 11, 12, 0, 30, 24, 997, DateTimeKind.Local).AddTicks(5562),
+                            RestaurantId = 2,
+                            TableId = 2
+                        },
+                        new
+                        {
+                            ReservationId = 3,
+                            CustomerId = 3,
+                            PartySize = 6,
+                            ReservationDate = new DateTime(2024, 11, 11, 23, 30, 24, 997, DateTimeKind.Local).AddTicks(5565),
+                            RestaurantId = 3,
+                            TableId = 3
+                        },
+                        new
+                        {
+                            ReservationId = 4,
+                            CustomerId = 4,
+                            PartySize = 2,
+                            ReservationDate = new DateTime(2024, 11, 11, 22, 30, 24, 997, DateTimeKind.Local).AddTicks(5567),
+                            RestaurantId = 4,
+                            TableId = 4
+                        },
+                        new
+                        {
+                            ReservationId = 5,
+                            CustomerId = 5,
+                            PartySize = 8,
+                            ReservationDate = new DateTime(2024, 11, 11, 21, 30, 24, 997, DateTimeKind.Local).AddTicks(5569),
+                            RestaurantId = 5,
+                            TableId = 5
+                        });
                 });
 
             modelBuilder.Entity("RestaurantReservation.Db.Restaurant", b =>
@@ -226,6 +480,48 @@ namespace RestaurantReservation.Db.Migrations
                     b.HasKey("RestaurantId");
 
                     b.ToTable("Restaurants");
+
+                    b.HasData(
+                        new
+                        {
+                            RestaurantId = 1,
+                            Address = "123 Food St, City",
+                            Name = "The Gourmet Kitchen",
+                            OpeningHours = "10 AM - 10 PM",
+                            PhoneNumber = "1111111111"
+                        },
+                        new
+                        {
+                            RestaurantId = 2,
+                            Address = "456 Pizza Rd, City",
+                            Name = "Pizza Palace",
+                            OpeningHours = "11 AM - 11 PM",
+                            PhoneNumber = "2222222222"
+                        },
+                        new
+                        {
+                            RestaurantId = 3,
+                            Address = "789 Sushi Ln, City",
+                            Name = "Sushi World",
+                            OpeningHours = "12 PM - 9 PM",
+                            PhoneNumber = "3333333333"
+                        },
+                        new
+                        {
+                            RestaurantId = 4,
+                            Address = "101 Burger Blvd, City",
+                            Name = "Burger Joint",
+                            OpeningHours = "9 AM - 9 PM",
+                            PhoneNumber = "4444444444"
+                        },
+                        new
+                        {
+                            RestaurantId = 5,
+                            Address = "202 Meat Ave, City",
+                            Name = "Steakhouse",
+                            OpeningHours = "1 PM - 10 PM",
+                            PhoneNumber = "5555555555"
+                        });
                 });
 
             modelBuilder.Entity("RestaurantReservation.Db.Table", b =>
@@ -247,6 +543,38 @@ namespace RestaurantReservation.Db.Migrations
                     b.HasIndex("RestaurantId");
 
                     b.ToTable("Tables");
+
+                    b.HasData(
+                        new
+                        {
+                            TableId = 1,
+                            Capacity = 4,
+                            RestaurantId = 1
+                        },
+                        new
+                        {
+                            TableId = 2,
+                            Capacity = 4,
+                            RestaurantId = 2
+                        },
+                        new
+                        {
+                            TableId = 3,
+                            Capacity = 6,
+                            RestaurantId = 3
+                        },
+                        new
+                        {
+                            TableId = 4,
+                            Capacity = 2,
+                            RestaurantId = 4
+                        },
+                        new
+                        {
+                            TableId = 5,
+                            Capacity = 8,
+                            RestaurantId = 5
+                        });
                 });
 
             modelBuilder.Entity("RestaurantReservation.Db.Employee", b =>

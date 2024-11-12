@@ -9,12 +9,13 @@ namespace RestaurantReservation.Db
     {
         public RestaurantReservationDbContext CreateDbContext(string[] args)
         {
+            var optionsBuilder = new DbContextOptionsBuilder<RestaurantReservationDbContext>();
+
             var configuration = new ConfigurationBuilder()
-                .SetBasePath(Directory.GetCurrentDirectory())  
-                .AddJsonFile("appsettings.json")  
+                .SetBasePath(Directory.GetCurrentDirectory())
+                .AddJsonFile("appsettings.json")
                 .Build();
 
-            var optionsBuilder = new DbContextOptionsBuilder<RestaurantReservationDbContext>();
             optionsBuilder.UseSqlServer(configuration.GetConnectionString("DefaultConnection"));
 
             return new RestaurantReservationDbContext(optionsBuilder.Options);

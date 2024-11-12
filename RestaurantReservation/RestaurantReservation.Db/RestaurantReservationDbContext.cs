@@ -28,6 +28,14 @@ namespace RestaurantReservation.Db
         {
             base.OnModelCreating(modelBuilder);
 
+            modelBuilder.Entity<MenuItem>()
+                .Property(m => m.Price)
+                .HasPrecision(18, 2); 
+
+            modelBuilder.Entity<Order>()
+                .Property(o => o.TotalAmount)
+                .HasPrecision(18, 2);
+
             modelBuilder.Entity<Reservation>()
                 .HasOne(r => r.Customer)
                 .WithMany(c => c.Reservations)
@@ -78,14 +86,13 @@ namespace RestaurantReservation.Db
                 .WithMany(r => r.Tables)
                 .HasForeignKey(t => t.RestaurantId);
 
-            // Seed Data for each entity
             modelBuilder.Entity<Customer>().HasData(
-                new Customer { CustomerId = 1, FirstName = "John", LastName = "Doe", Email = "john.doe@example.com", PhoneNumber = "1234567890" },
-                new Customer { CustomerId = 2, FirstName = "Jane", LastName = "Smith", Email = "jane.smith@example.com", PhoneNumber = "9876543210" },
-                new Customer { CustomerId = 3, FirstName = "Robert", LastName = "Johnson", Email = "robert.johnson@example.com", PhoneNumber = "5555555555" },
-                new Customer { CustomerId = 4, FirstName = "Emily", LastName = "Davis", Email = "emily.davis@example.com", PhoneNumber = "4444444444" },
-                new Customer { CustomerId = 5, FirstName = "Michael", LastName = "Brown", Email = "michael.brown@example.com", PhoneNumber = "3333333333" }
-            );
+        new Customer { CustomerId = 1, FirstName = "John", LastName = "Doe", Email = "john.doe@example.com", PhoneNumber = "1234567890" },
+        new Customer { CustomerId = 2, FirstName = "Jane", LastName = "Smith", Email = "jane.smith@example.com", PhoneNumber = "9876543210" },
+        new Customer { CustomerId = 3, FirstName = "Robert", LastName = "Johnson", Email = "robert.johnson@example.com", PhoneNumber = "5555555555" },
+        new Customer { CustomerId = 4, FirstName = "Emily", LastName = "Davis", Email = "emily.davis@example.com", PhoneNumber = "4444444444" },
+        new Customer { CustomerId = 5, FirstName = "Michael", LastName = "Brown", Email = "michael.brown@example.com", PhoneNumber = "3333333333" }
+    );
 
             modelBuilder.Entity<Restaurant>().HasData(
                 new Restaurant { RestaurantId = 1, Name = "The Gourmet Kitchen", Address = "123 Food St, City", PhoneNumber = "1111111111", OpeningHours = "10 AM - 10 PM" },
@@ -111,6 +118,22 @@ namespace RestaurantReservation.Db
                 new Employee { EmployeeId = 5, RestaurantId = 5, FirstName = "Eve", LastName = "Taylor", Position = "Manager" }
             );
 
+            modelBuilder.Entity<Reservation>().HasData(
+                new Reservation { ReservationId = 1, CustomerId = 1, RestaurantId = 1, TableId = 1, ReservationDate = DateTime.Now.AddHours(-1), PartySize = 4 },
+                new Reservation { ReservationId = 2, CustomerId = 2, RestaurantId = 2, TableId = 2, ReservationDate = DateTime.Now.AddHours(-2), PartySize = 2 },
+                new Reservation { ReservationId = 3, CustomerId = 3, RestaurantId = 3, TableId = 3, ReservationDate = DateTime.Now.AddHours(-3), PartySize = 6 },
+                new Reservation { ReservationId = 4, CustomerId = 4, RestaurantId = 4, TableId = 4, ReservationDate = DateTime.Now.AddHours(-4), PartySize = 2 },
+                new Reservation { ReservationId = 5, CustomerId = 5, RestaurantId = 5, TableId = 5, ReservationDate = DateTime.Now.AddHours(-5), PartySize = 8 }
+            );
+
+            modelBuilder.Entity<Order>().HasData(
+                new Order { OrderId = 1, ReservationId = 1, EmployeeId = 1, OrderDate = DateTime.Now, TotalAmount = 50.00M },
+                new Order { OrderId = 2, ReservationId = 2, EmployeeId = 2, OrderDate = DateTime.Now, TotalAmount = 35.50M },
+                new Order { OrderId = 3, ReservationId = 3, EmployeeId = 3, OrderDate = DateTime.Now, TotalAmount = 75.00M },
+                new Order { OrderId = 4, ReservationId = 4, EmployeeId = 4, OrderDate = DateTime.Now, TotalAmount = 28.25M },
+                new Order { OrderId = 5, ReservationId = 5, EmployeeId = 5, OrderDate = DateTime.Now, TotalAmount = 90.00M }
+            );
+
             modelBuilder.Entity<MenuItem>().HasData(
                 new MenuItem { ItemId = 1, RestaurantId = 1, Name = "Gourmet Burger", Description = "Juicy beef patty with gourmet toppings", Price = 12.99M },
                 new MenuItem { ItemId = 2, RestaurantId = 2, Name = "Margherita Pizza", Description = "Classic pizza with tomatoes and mozzarella", Price = 8.99M },
@@ -119,13 +142,7 @@ namespace RestaurantReservation.Db
                 new MenuItem { ItemId = 5, RestaurantId = 5, Name = "Ribeye Steak", Description = "Succulent ribeye cooked to perfection", Price = 22.99M }
             );
 
-            modelBuilder.Entity<Order>().HasData(
-                new Order { OrderId = 1, ReservationId = 1, EmployeeId = 1, OrderDate = DateTime.Now, TotalAmount = 50.00M },
-                new Order { OrderId = 2, ReservationId = 2, EmployeeId = 2, OrderDate = DateTime.Now, TotalAmount = 35.50M},
-                new Order { OrderId = 3, ReservationId = 3, EmployeeId = 3, OrderDate = DateTime.Now, TotalAmount = 75.00M },
-                new Order { OrderId = 4, ReservationId = 4, EmployeeId = 4, OrderDate = DateTime.Now, TotalAmount = 28.25M },
-                new Order { OrderId = 5, ReservationId = 5, EmployeeId = 5, OrderDate = DateTime.Now, TotalAmount = 90.00M }
-            );
+            
 
             modelBuilder.Entity<OrderItem>().HasData(
                 new OrderItem { OrderItemId = 1, OrderId = 1, ItemId = 1, Quantity = 2 },
